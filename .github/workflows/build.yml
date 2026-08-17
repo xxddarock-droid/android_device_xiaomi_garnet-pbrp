@@ -22,11 +22,12 @@ jobs:
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
+        git config --global core.pager cat
 
     - name: Initialize Repo and Sync Source
       run: |
         mkdir pbrp_workspace && cd pbrp_workspace
-        repo init -u https://github.com -b android-12.1 --depth=1 --no-clone-bundle --no-tags
+        repo init --repo-url=https://googlesource.com -u https://github.com -b android-12.1 --depth=1 --no-clone-bundle --no-tags
         repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
     - name: Clone Device Tree
